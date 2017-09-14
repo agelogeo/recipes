@@ -22,4 +22,19 @@
     </ion-list>
     <button ion-button type="submit" block [disabled]="!f.valid">Add Item</button>
   </form>
+
+  <ion-list>
+    <ion-item-sliding *ngFor="let item of listItems; let i = index">
+      <ion-item>
+        <h3>{{item.name}} : {{ item.amount }}</h3>
+      </ion-item>
+      <ion-item-options side="right">
+          <button ion-button color="danger" (click)="onCheckItem(i)">Delete</button>
+      </ion-item-options>
+      <ion-item-options side="left">
+        <button ion-button color="secondary" >Favorite</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
 </ion-content>
