@@ -28,11 +28,8 @@
       <ion-item>
         <h3>{{item.name}} : {{ item.amount }}</h3>
       </ion-item>
-      <ion-item-options side="right">
-          <button ion-button color="danger" (click)="onCheckItem(i)">Delete</button>
-      </ion-item-options>
-      <ion-item-options side="left">
-        <button ion-button color="secondary" >Favorite</button>
+      <ion-item-options>
+          <button ion-button color="danger" (click)="onCheckItem(i)"><ion-icon name="trash"> Delete</ion-icon></button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
