@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AlertController, IonicPage, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {AuthService} from "../../services/auth";
+import {NgForm} from "@angular/forms";
 
 /**
  * Generated class for the SigninPage page.
@@ -15,11 +17,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class SigninPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public authService: AuthService,private loadingCtrl: LoadingController,private alertCtrl: AlertController) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SigninPage');
+  onSignin(form: NgForm){
+    const loading = this.loadingCtrl.create({
+      content: 'Signing you in...'
+    });
+    loading.present();
+    this.authService.signin(form.value.email,form.value.password)
+      .then(data => {
+        loading.dismiss();
+      })
+      .catch(error =>{
+        loading.dismiss();
+        const alert = this.alertCtrl.create({
+          title: 'Failed',
+          message: error.message,
+          buttons: ['Ok']
+        });
+        alert.present();
+      })
   }
-
 }
